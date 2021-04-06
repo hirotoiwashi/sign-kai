@@ -1,0 +1,20 @@
+.cart {
+  color: blue;
+  margin: 50px;
+}
+
+.cart-item-header {
+  display: flex;
+}
+
+.cart-item-header h1 {
+  flex: 1;
+}
+
+.cart-item-header i {
+  flex: 2;
+}
+
+.cart-item-header p {
+  flex: 1;
+}

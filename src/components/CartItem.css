@@ -1,0 +1,37 @@
+.cart-item {
+  display: flex;
+  background-color: white;
+  margin: 10px;
+}
+
+.cart-item:nth-child(2n) {
+  background-color: rgb(226, 226, 226);
+}
+
+.product-image {
+  flex: 1;
+}
+
+.product-img {
+  width: 100%;
+}
+
+.imformation {
+  flex: 2;
+  text-align: center;
+}
+
+.imformation .delete {
+}
+
+.imformation .delete:hover {
+  color: black;
+}
+
+.price {
+  flex: 1;
+}
+
+select {
+  font-size: 1rem;
+}
