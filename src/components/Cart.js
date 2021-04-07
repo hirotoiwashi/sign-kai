@@ -1,51 +1,24 @@
 import React from 'react'; 
-import ReactDOM from 'react-dom';
-import './Cart.css';
-import CartItems from './CartItem'
-import Image1 from "./images/item-image1.jpg";
-import Image2 from "./images/item-image2.jpg";
+import {useSelector} from 'react-redux';
+import './styles/Cart.css';
 
-const items = [{
-    image: Image1,
-    name: "商品名1",
-    id: 1,
-    price: 1000,
-    num: 3
-},{
-    image: Image2,
-    name: "商品名2",
-    id: 2,
-    price: 2000,
-    num: 4
-}]
+import CartItem from './CartItem';
 
-class Cart extends React.Component{
+const Cart = () => {
 
-    constructor(){
-        super()
-        this.state = {
-            items: items
-        }
+    const cart = useSelector(state => state.cart);
 
-        this.handleAllDel = this.handleAllDel.bind(this);
-    }
-
-    handleAllDel() {
-        this.setState({items: []});
-    }
-
-    render(){
-        return(
-            <div className="cart">
-                <div className="cart-item-header">
-                    <h1>カートです</h1>
-                    <i onClick={this.handleAllDel}>全ての商品を削除する</i>
-                    <p>価格</p>
-                </div>
-                <CartItems items={this.state.items} />
+    return(
+        <div className="cart-wrapper">
+            <div className="cart-container">
+                {
+                    cart.map(item => (
+                        <CartItem key={item.id} itemId={item.id} itemQuantity={item.quantity} />
+                    ))
+                }
             </div>
-        )
-    }
-}
+        </div>
+    );
+};
 
-export default Cart
+export default Cart;

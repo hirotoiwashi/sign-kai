@@ -1,85 +1,47 @@
 import React from 'react';
-import './CartItem.css';
+import {useSelector, useDispatch} from 'react-redux';
+import './styles/CartItem.css';
 
-class CartItems extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            items: this.props.items
-        }
+import {itemDelete} from '../features/items/cartSlice';
 
-        this.handleDel = this.handleDel.bind(this);
+const CartItem = (props) => {
+
+    console.log(props.itemId);
+
+    const dispatch = useDispatch();
+
+    const item = useSelector(state => 
+        state.items.find(item => item.id === props.itemId)
+    );
+
+    const onDeleteClicked = (id) => {
+        dispatch(itemDelete(id));
     }
-
-    handleDel(id) {
-        let index = this.state.items.findIndex((item)=>item.id===id);
-        this.state.items.splice(index,1);
-
-        this.setState({items: this.state.items});
-    }
-
     
+    return (
+        <div className="cartitem-wrapper">
+            <div className="cartitem-container">
+                <div className="cartitem-image-wrapper">
+                    <img src={item.image} alt="cartitem" />
+                </div>
+                <h2 className="cartitem-title">{item.title}</h2>
 
-    render() {
-        return (
-            <div>
-                {this.state.items.map((item)=><CartItem item={item} key={item.id} delAllItem={this.handleAllDel} delItem={this.handleDel} />)}
-                {/* <Purchase /> */}
+                <button className="cartitem-delete" onClick={() => onDeleteClicked(item.id)}>
+                    削除
+                </button>
+                
+                <select name="数量" value={props.itemQuantity} >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+
+                <h3 className="cartitem-quantity">数量</h3>
             </div>
-        )
-    }
-}
+        </div>
+    );
+};
 
-class CartItem extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            image: this.props.item.image,
-            name: this.props.item.name,
-            price: this.props.item.price,
-            num: this.props.item.num,
-        }
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleDel = this.handleDel.bind(this);
-    }
-
-    handleChange(e) {
-        const newNum = Number(e.target.value);
-        this.setState({num: newNum});
-    }
-
-    handleDel() {
-        const id = this.props.item.id;
-        this.props.delItem(id);
-    }
-
-    render(){
-        const allPrice = this.state.price * this.state.num;
-        const options = [...Array(10)].map((_,i) => i);
-        const optionElement = options.map((option)=><option value={option.toString()} >{option}</option>)
-        return(
-            <div className="cart-item">
-                <div className="product-image">
-                    <img src={this.state.image} className="product-img"></img>
-                </div>
-                <div className="imformation">
-                    <p>{this.state.name}</p>
-                    <p>{this.state.price}円</p>
-                    <label>個数:</label>
-                    <select onChange={this.handleChange} value={this.state.num}>{optionElement}</select>
-                    <span className="delete" onClick={this.handleDel}>削除する</span>
-                </div>
-                <div className="price">
-                    <p>{allPrice}</p>
-                </div>
-            </div>
-        );
-    }
-}
-
-class Purchase extends React.Component {
-    
-}
-
-export default CartItems
+export default CartItem;
