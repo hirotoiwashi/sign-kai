@@ -9,7 +9,7 @@ const Cart = () => {
     const cart = useSelector(state => state.cart);
 
     return(
-        <div className="cart-wrapper">
+        <div className="cart-page-wrapper">
             <div className="cart-container">
                 {
                     cart.map(item => (

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import './styles/ItemDetails.css';
 
 import {add} from '../features/items/cartSlice';
@@ -19,6 +19,25 @@ const ItemDetail = (props) => {
         dispatch(add(id, quantity));
     }
 
+    const loginState = useSelector(state => state.users.isLoggedIn);
+
+    let operation;
+    if(loginState){
+        operation = (
+            <div className="operation">
+                <p className="quantity">数量</p>
+                <select name="数量" value={quantity} onChange={(event) => onHandleChange(event)}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <button className="cart-add" onClick={() => onAddClicked(props.itemId, quantity)}>カートに追加</button>
+            </div>
+        );
+    }
+
     return(
         <div className="item-detail-wrapper">
             <div className="item-detail-container">
@@ -30,17 +49,8 @@ const ItemDetail = (props) => {
                     <p>{props.itemInfo}</p>
                 </div>
 
-                <div className="operation">
-                    <p className="quantity">数量</p>
-                    <select name="数量" value={quantity} onChange={(event) => onHandleChange(event)}>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                    <button className="cart-add" onClick={() => onAddClicked(props.itemId, quantity)}>カートに追加</button>
-                </div>
+                {operation}
+
             </div>
         </div>
     );

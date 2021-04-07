@@ -6,8 +6,6 @@ import {itemDelete} from '../features/items/cartSlice';
 
 const CartItem = (props) => {
 
-    console.log(props.itemId);
-
     const dispatch = useDispatch();
 
     const item = useSelector(state => 
@@ -15,6 +13,7 @@ const CartItem = (props) => {
     );
 
     const onDeleteClicked = (id) => {
+        console.log(id);
         dispatch(itemDelete(id));
     }
     
@@ -30,7 +29,7 @@ const CartItem = (props) => {
                     削除
                 </button>
                 
-                <select name="数量" value={props.itemQuantity} >
+                <select name="数量" defaultValue={props.itemQuantity} >
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>

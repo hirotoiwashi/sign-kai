@@ -1,0 +1,39 @@
+.payment-page-wrapper{
+    width: 100%;
+    height: auto;
+    padding-top: 150px;
+}
+
+.payment-page-container{
+    width: 1000px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.payment-page-title{
+    font-size: 35px;
+    font-weight: 100;
+    letter-spacing: 5px;
+}
+
+.payment-page-title2{
+    font-size: 12px;
+}
+
+.payment-page-content{
+    width: 800px;
+    height: 1000px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+.payment-page-content h3{
+    font-size: 20px;
+    text-align: left;
+}
+
+.payment-page-content p{
+    font-size: 15px;
+    text-align: left;
+    margin-bottom: 30px;
+}

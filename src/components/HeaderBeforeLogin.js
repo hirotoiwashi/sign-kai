@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import posed from 'react-pose';
 
@@ -40,17 +40,12 @@ const SubmenuBack = posed.div({
 
 
 
-class HeaderBeforeLogin extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            isMenuOpen: false,
-        };
-    }
+const HeaderBeforeLogin = () => {
 
-    toggleMenu = () => this.setState({isMenuOpen: !this.state.isMenuOpen});
+    const [isMenuOpen, setMenuState] = useState(false);
 
-    render() {
+    const toggleMenu = () => setMenuState(!isMenuOpen);
+
     return(
         <header>
             <Link className="header-left" to="/">
@@ -74,7 +69,7 @@ class HeaderBeforeLogin extends React.Component {
               </Link>
 
               <input type="checkbox" id="menu-trigger" />
-              <label htmlFor="menu-trigger" className="menu-trigger-label" onClick={this.toggleMenu}>
+              <label htmlFor="menu-trigger" className="menu-trigger-label" onClick={() => toggleMenu()}>
                 <div className="menu-bar-wrapper">
                   <div className="menu-bar-container">
                     <div className="menu-bar">
@@ -88,23 +83,22 @@ class HeaderBeforeLogin extends React.Component {
 
               <SubmenuBack 
                 className="submenu-background"
-                pose={this.state.isMenuOpen ? 'open' : 'close'}></SubmenuBack>
+                pose={isMenuOpen ? 'open' : 'close'}></SubmenuBack>
 
               <Submenu
                 className="submenu"
-                pose={this.state.isMenuOpen ? 'open' : 'close'}>
+                pose={isMenuOpen ? 'open' : 'close'}>
                 <ul>
-                  <li><button className="submenu-content sub-payment">お支払い方法について</button></li>
-                  <li><button className="submenu-content sub-shipping">送料について</button></li>
-                  <li><button className="submenu-content sub-privacy">プライバシーポリシー</button></li>
-                  <li><button className="submenu-content sub-qaf">よくある質問（FAQ）</button></li>
-                  <li><button className="submenu-content sub-contact">お問い合わせ</button></li>
+                  <Link to="/payment" className="submenu-link-before"><li><button className="submenu-content sub-payment" onClick={() => toggleMenu()}>お支払い方法について</button></li></Link>
+                  <Link to="/shipping" className="submenu-link-before"><li><button className="submenu-content sub-shipping" onClick={() => toggleMenu()}>送料について</button></li></Link>
+                  <Link to="/privacy-policy" className="submenu-link-before"><li><button className="submenu-content sub-privacy" onClick={() => toggleMenu()}>プライバシーポリシー</button></li></Link>
+                  <Link to="/faq" className="submenu-link-before"><li><button className="submenu-content sub-qaf" onClick={() => toggleMenu()}>よくある質問（FAQ）</button></li></Link>
+                  <Link to="/contact" className="submenu-link-before"><li><button className="submenu-content sub-contact" onClick={() => toggleMenu()}>お問い合わせ</button></li></Link>
                 </ul>
               </Submenu>
             </div>
           </header>
     );
-    }
 }
 
 export default HeaderBeforeLogin;

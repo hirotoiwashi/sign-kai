@@ -9,6 +9,7 @@ const cartSlice = createSlice({
         add: {
             reducer(state, action) {
                 state.push(action.payload);
+                console.log(state);
             },
             prepare(id, quantity) {
                 return{
@@ -20,9 +21,12 @@ const cartSlice = createSlice({
             }
         },
         itemDelete: (state, action) => {
+            console.log(state);
+            console.log(action);
             const id = action;
             const index = state.findIndex((item) => item.id === id);
             state.splice(index, 1);
+            console.log(state);
         }
     }
 });
