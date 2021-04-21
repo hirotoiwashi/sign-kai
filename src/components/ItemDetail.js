@@ -12,7 +12,7 @@ const ItemDetail = (props) => {
     const [quantity, setQuantity] = useState(1);
 
     const onHandleChange = (event) => {
-        setQuantity(event.target.value);
+        setQuantity(Number(event.target.value));
     }
 
     const onAddClicked = (id, quantity) => {
