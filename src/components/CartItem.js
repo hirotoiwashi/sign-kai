@@ -22,10 +22,9 @@ const CartItem = (props) => {
 
     const [quantity, setQuantity] = useState(item.quantity)
 
-    const quantityClicked = e => setQuantity(e.target.value)
+    const changedQuantity = e => setQuantity(Number(e.target.value))
 
-    const onQuantityChanged = (id,quantity) => {
-        dispatch(changeQuantity(id,quantity))
+    const onQuantityChanged = () => {dispatch(changeQuantity({id: item.id,quantity: quantity}))
     }
     
     return (
@@ -40,13 +39,16 @@ const CartItem = (props) => {
                     削除
                 </button>
                 
-                <select name="数量" defaultValue={props.itemQuantity} onChange={() => onQuantityChanged(item.id,quantity)}>
-                    <option onClick={quantityClicked} value="1">1</option>
-                    <option onClick={quantityClicked} value="2">2</option>
-                    <option onClick={quantityClicked} value="3">3</option>
-                    <option onClick={quantityClicked} value="4">4</option>
-                    <option onClick={quantityClicked} value="5">5</option>
+                <select name="数量" defaultValue={props.itemQuantity} onChange={changedQuantity}>
+                    <option  value="1">1</option>
+                    <option  value="2">2</option>
+                    <option  value="3">3</option>
+                    <option  value="4">4</option>
+                    <option  value="5">5</option>
                 </select>
+                <button className="cartitem-change" onClick={onQuantityChanged}>
+                    　変更
+                </button>
 
                 <h3 className="cartitem-quantity">数量</h3>
             </div>
